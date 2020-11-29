@@ -17,11 +17,11 @@ response = requests.get('https://collectionapi.metmuseum.org/public/collection/v
 numOfArt = response.json().get('total')
 count = 0
 
-
-for i in range(67000, 70000):
+# 322491,322495
+for i in range(5000, 10000):
 
     if i % 50 == 0:
-        time.sleep(.5)
+        time.sleep(1)
 
     json = requests.get('https://collectionapi.metmuseum.org/public/collection/v1/objects/' + str(i)).json()
     classification = json.get("classification")
