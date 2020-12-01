@@ -29,12 +29,21 @@ for i in range(1, 200000):
     image_link = json.get("primaryImage")
     type_of_art = json.get("department")
     tags = json.get('tags')
-    if (classification == "Paintings") and 'Men' not in tags and 'Women' not in tags and 'Children' not in tags and 'Portraits' not in tags and 'Human Figures' not in tags and image_link != '':
-        try:
-            urllib.request.urlretrieve(image_link, "Images/image_" + str(i) + ".jpg")
-            print(image_link)
-            count += 1
-        except:
-            pass
+    if (classification == "Paintings") and image_link != '':
+        remove = False
+        for tag in tags:
+            term = tag.get('term')
+            if term == 'Portraits' or term == 'Men' or term == 'Women' and term == 'Children' and term == 'Human Figures':
+                remove = True
+                break
+        if remove is False:
+            try:
+                urllib.request.urlretrieve(image_link, "Images/image_" + str(i) + ".jpg")
+                print(i)
+                print(tags)
+                count += 1
+            except:
+                pass
+
     if i % 1000 == 0:
         print(i)
