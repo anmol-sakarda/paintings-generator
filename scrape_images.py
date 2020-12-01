@@ -29,7 +29,7 @@ for i in range(1, 200000):
     image_link = json.get("primaryImage")
     type_of_art = json.get("department")
     tags = json.get('tags')
-    if (classification == "Paintings") and 'Portraits' not in tags and 'Human Figures' not in tags and image_link != '':
+    if (classification == "Paintings") and 'Men' not in tags and 'Women' not in tags and 'Children' not in tags and 'Portraits' not in tags and 'Human Figures' not in tags and image_link != '':
         try:
             urllib.request.urlretrieve(image_link, "Images/image_" + str(i) + ".jpg")
             print(image_link)
