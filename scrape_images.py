@@ -18,21 +18,23 @@ numOfArt = response.json().get('total')
 count = 0
 
 # 322491,322495
-for i in range(5000, 10000):
+for i in range(1, 200000):
 
     if i % 50 == 0:
-        time.sleep(1)
+        sleeping = random.randint(2, 4)
+        time.sleep(sleeping)
 
     json = requests.get('https://collectionapi.metmuseum.org/public/collection/v1/objects/' + str(i)).json()
     classification = json.get("classification")
     image_link = json.get("primaryImage")
     type_of_art = json.get("department")
-    if (classification == "Paintings") and type_of_art == 'Modern and Contemporary Art' and image_link != '':
+    tags = json.get('tags')
+    if (classification == "Paintings") and 'Portraits' not in tags and 'Human Figures' not in tags and image_link != '':
         try:
             urllib.request.urlretrieve(image_link, "Images/image_" + str(i) + ".jpg")
             print(image_link)
             count += 1
         except:
             pass
-
-
+    if i % 1000 == 0:
+        print(i)
