@@ -1,3 +1,4 @@
+# import necessary libraries
 import os
 from PIL import Image
 

@@ -10,9 +10,6 @@ from torchvision import datasets
 from torchvision import transforms
 import torch.optim as optim
 
-from PIL import Image
-import os, sys
-
 batch_size = 32
 img_size = 32
 data_dir = 'image_folder/'
@@ -26,6 +23,7 @@ imagenet_data = datasets.ImageFolder(data_dir, transform=transform)
 celeba_train_loader = torch.utils.data.DataLoader(imagenet_data,
                                                   batch_size,
                                                   shuffle=True)
+
 
 def scale(img, feature_range=(-1, 1)):
     min_, max_ = feature_range
