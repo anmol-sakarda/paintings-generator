@@ -9,10 +9,13 @@ import torch
 from torchvision import datasets
 from torchvision import transforms
 import torch.optim as optim
+import os
 
 batch_size = 32
 img_size = 32
 data_dir = 'image_folder/'
+
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
 # Apply the transformations
 transform = transforms.Compose([transforms.Resize(img_size), transforms.ToTensor()])
@@ -321,7 +324,7 @@ def train(D, G, n_epochs, print_every=100):
 
 
 # set number of epochs
-n_epochs = 600
+n_epochs = 400
 
 # call training function
 losses = train(D, G, n_epochs=n_epochs)
