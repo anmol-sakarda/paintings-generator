@@ -18,7 +18,7 @@ numOfArt = response.json().get('total')
 count = 0
 
 # 322491,322495
-for i in range(78000, 200000):
+for i in range(97000, 200000):
 
     if i % 50 == 0:
         sleeping = random.randint(2, 4)
