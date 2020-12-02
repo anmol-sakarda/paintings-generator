@@ -18,7 +18,7 @@ numOfArt = response.json().get('total')
 count = 0
 
 # 322491,322495
-for i in range(1, 200000):
+for i in range(78000, 200000):
 
     if i % 50 == 0:
         sleeping = random.randint(2, 4)
@@ -29,21 +29,22 @@ for i in range(1, 200000):
     image_link = json.get("primaryImage")
     type_of_art = json.get("department")
     tags = json.get('tags')
-    if (classification == "Paintings") and image_link != '':
+    if (classification == "Paintings") and image_link != '' and type_of_art != 'Asian Art':
         remove = False
-        for tag in tags:
-            term = tag.get('term')
-            if term == 'Portraits' or term == 'Men' or term == 'Women' and term == 'Children' and term == 'Human Figures':
-                remove = True
-                break
-        if remove is False:
-            try:
-                urllib.request.urlretrieve(image_link, "Images/image_" + str(i) + ".jpg")
-                print(i)
-                print(tags)
-                count += 1
-            except:
-                pass
+        if tags is not None:
+            for tag in tags:
+                term = tag.get('term')
+                if term == 'Portraits' or term == 'Men' or term == 'Women' or term == 'Children' or term == 'Human Figures' or term == 'Profiles':
+                    remove = True
+                    break
+            if remove is False:
+                try:
+                    urllib.request.urlretrieve(image_link, "Images/image_" + str(i) + ".jpg")
+                    print(i)
+                    print(tags)
+                    count += 1
+                except:
+                    pass
 
     if i % 1000 == 0:
         print(i)
