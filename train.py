@@ -147,8 +147,8 @@ def weights_init_normal(m):
 
 
 # Defining the model hyperparamameters
-d_conv_dim = 32
-g_conv_dim = 32
+d_conv_dim = 64
+g_conv_dim = 64
 z_size = 100  # Size of noise vector
 
 D = Discriminator(d_conv_dim)
@@ -167,18 +167,18 @@ device = "cuda:0" if torch. cuda.is_available() else "cpu"
 
 def real_loss(D_out, smooth=False):
     batch_size = D_out.size(0)
-    print("batch size")
+    #print("batch size")
     if smooth:
         labels = torch.ones(batch_size) * 0.9
     else:
         labels = torch.ones(batch_size)
 
     labels = labels.to(device)
-    print(labels.size())
-    print("change labels")
+    #print(labels.size())
+    #print("change labels")
     criterion = nn.BCEWithLogitsLoss()
     loss = criterion(D_out.squeeze(), labels)
-    print("set loss")
+    #print("set loss")
     return loss
 
 
@@ -219,7 +219,7 @@ def train(D, G, n_epochs, print_every=100):
 
     # Get some fixed data for sampling. These are images that are held
     # constant throughout training, and allow us to inspect the model's performance
-    sample_size = 16
+    sample_size = 32
     fixed_z = np.random.uniform(-1, 1, size=(sample_size, z_size))
     fixed_z = torch.from_numpy(fixed_z).float()
     # move z to GPU if available
@@ -235,7 +235,7 @@ def train(D, G, n_epochs, print_every=100):
                 #continue
             batch_size = real_images.size(0)
             real_images = scale(real_images)
-            print("batch sz & real images")
+            #print("batch sz & real images")
 
             # ===============================================
             #         YOUR CODE HERE: TRAIN THE NETWORKS
@@ -248,26 +248,26 @@ def train(D, G, n_epochs, print_every=100):
             real_images = real_images.to(device)
 
             dreal = D(real_images)
-            print(batch_i)
+            #print(batch_i)
             dreal_loss = real_loss(dreal)
-            print("real images")
+            #print("real images")
 
             # fake images
 
             # Generate fake images
             z = np.random.uniform(-1, 1, size=(batch_size, z_size))
             z = torch.from_numpy(z).float()
-            print("made fake images")
+            #print("made fake images")
             # move x to GPU, if available
             z = z.to(device)
-            print("to device")
+            #print("to device")
             fake_images = G(z)
-            print("Generator thing")
+            #print("Generator thing")
 
             # loss of fake images
             dfake = D(fake_images)
             dfake_loss = fake_loss(dfake)
-            print("fake image loss")
+            #print("fake image loss")
 
             # Adding both lossess
             d_loss = dreal_loss + dfake_loss
@@ -283,13 +283,13 @@ def train(D, G, n_epochs, print_every=100):
             z = torch.from_numpy(z).float()
             z = z.to(device)
             fake_images = G(z)
-            print("generated fake images")
+            #print("generated fake images")
 
             # Compute the discriminator losses on fake images
             # using flipped labels!
             D_fake = D(fake_images)
             g_loss = real_loss(D_fake, True)  # use real loss to flip labels
-            print("compute discriminator losses on fake images")
+            #print("compute discriminator losses on fake images")
 
             # perform backprop
             g_loss.backward()
@@ -324,7 +324,7 @@ def train(D, G, n_epochs, print_every=100):
 
 
 # set number of epochs
-n_epochs = 400
+n_epochs = 50
 
 # call training function
 losses = train(D, G, n_epochs=n_epochs)
