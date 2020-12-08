@@ -1,12 +1,12 @@
 # import necessary libraries
 import os
 from PIL import Image, ImageEnhance
-#import cv2
+
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
-path = "image_folder/Images/"
-images_path = "Images/"
+path = "dataset/Images/"
+images_path = "scraped_images/"
 dirs = os.listdir(images_path)
 
 
@@ -26,10 +26,10 @@ def resize_flip():
             im_flip_enhancer = ImageEnhance.Sharpness(flipped)
             flipped_image = im_flip_enhancer.enhance(2)
             flip_sharpen = im_flip_enhancer.enhance(4)
-            imResized.save("image_folder/Images/" + item_name + "_resized.jpg", 'JPEG', quality=90)
-            flipped_image.save("image_folder/Images/" + item_name + "_resized_flipped.jpg", 'JPEG', quality=90)
-            normal_sharpen.save("image_folder/Images/" + item_name + "_resized_sharpen.jpg", 'JPEG', quality=90)
-            flip_sharpen.save("image_folder/Images/" + item_name + "_resized_flipped_sharpen.jpg", 'JPEG', quality=90)
+            imResized.save("dataset/Images/" + item_name + "_resized.jpg", 'JPEG', quality=90)
+            flipped_image.save("dataset/Images/" + item_name + "_resized_flipped.jpg", 'JPEG', quality=90)
+            normal_sharpen.save("dataset/Images/" + item_name + "_resized_sharpen.jpg", 'JPEG', quality=90)
+            flip_sharpen.save("dataset/Images/" + item_name + "_resized_flipped_sharpen.jpg", 'JPEG', quality=90)
 
 
 resize_flip()

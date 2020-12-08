@@ -39,7 +39,7 @@ for i in range(97000, 200000):
                     break
             if remove is False:
                 try:
-                    urllib.request.urlretrieve(image_link, "Images/image_" + str(i) + ".jpg")
+                    urllib.request.urlretrieve(image_link, "scraped_images/image_" + str(i) + ".jpg")
                     print(i)
                     print(tags)
                     count += 1
