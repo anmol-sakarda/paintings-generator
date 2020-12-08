@@ -1,5 +1,7 @@
 # paintings-generator
-Download the code at ‘https://github.com/anmol-sakarda/paintings-generator’. 
+To install all packages, run the following command:
+	
+		pip3 install requirements.txt
 
 To scrape images, run the following command:
 
@@ -19,3 +21,4 @@ The resulting pkl file will be saved as ‘train_samples.pkl.’
 
 To calculate FID Scores, open the notebook ‘calculate_FID.ipynb’ and run every cell in that notebook. The default pkl object being used is the ‘train_samples.pkl’ file. 
 The FID scores are then calculated for each epoch used in the training and the average and standard deviations are reported. 
+
